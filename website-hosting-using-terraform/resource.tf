@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "newbucket" {
-    bucket = "my-bucket"
+    bucket = "temp-bucket32"
   
 }
 
@@ -14,7 +14,7 @@ resource "aws_s3_bucket_public_access_block" "newbucket" {
 }
 
 resource "aws_s3_object" "index" {
-    bucket = "my-bucket"
+    bucket = "temp-bucket32"
     key = "index.html"
     source = "index.html"
     content_type = "text/html"
@@ -23,7 +23,7 @@ resource "aws_s3_object" "index" {
 }
 
 resource "aws_s3_object" "error" {
-    bucket = "my-bucket"
+    bucket = "temp-bucket32"
     key = "error.html"
     source = "error.html"
     content_type = "text/html"
@@ -55,8 +55,8 @@ resource "aws_s3_buket_policy" "policy_read_access" {
 	        "Principal": "*",
             "Action": [ "s3:GetObject" ],
             "Resource": [
-              "${aws_s3_bucket.newbuket.arn}",
-              "${aws_s3_bucket.newbuket.arn}/*"
+              "${aws_s3_bucket.newbucket.arn}",
+              "${aws_s3_bucket.newbucket.arn}/*"
       ]
     }
   ]
