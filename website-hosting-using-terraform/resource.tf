@@ -1,10 +1,10 @@
-resource "aws_s3_bucket" "newbucket" {
-    bucket = "temp-bucket32"
+resource "aws_s3_bucket" "temp-bucket32" {
+    bucket = "terra-bucket"
   
 }
 
-resource "aws_s3_bucket_public_access_block" "newbucket" {
-    bucket = aws_s3_bucket.newbucket.id
+resource "aws_s3_bucket_public_access_block" "temp-bucket32" {
+    bucket = aws_s3_bucket.temp-bucket32.id
 
     block_public_acls = false
     block_public_policy = false
@@ -14,7 +14,7 @@ resource "aws_s3_bucket_public_access_block" "newbucket" {
 }
 
 resource "aws_s3_object" "index" {
-    bucket = "temp-bucket32"
+    bucket = "terra-bucket"
     key = "index.html"
     source = "index.html"
     content_type = "text/html"
@@ -23,7 +23,7 @@ resource "aws_s3_object" "index" {
 }
 
 resource "aws_s3_object" "error" {
-    bucket = "temp-bucket32"
+    bucket = "terra-bucket"
     key = "error.html"
     source = "error.html"
     content_type = "text/html"
@@ -31,8 +31,8 @@ resource "aws_s3_object" "error" {
   
 }
 
-resource "aws_s3_bucket_website_configuration" "newbucket" {
-    bucket = aws_s3_bucket.newbucket.id
+resource "aws_s3_bucket_website_configuration" "temp-bucket32" {
+    bucket = aws_s3_bucket.temp-bucket32.id
 
     index_document {
       suffix = "index.html"
@@ -45,7 +45,7 @@ resource "aws_s3_bucket_website_configuration" "newbucket" {
 }
 
 resource "aws_s3_buket_policy" "policy_read_access" {
-    bucket = aws_s3_bucket.newbucket.id
+    bucket = aws_s3_bucket.temp-bucket32.id
     policy = <<EOF
     {
         "Version": "2012-10-17",
@@ -55,8 +55,8 @@ resource "aws_s3_buket_policy" "policy_read_access" {
 	        "Principal": "*",
             "Action": [ "s3:GetObject" ],
             "Resource": [
-              "${aws_s3_bucket.newbucket.arn}",
-              "${aws_s3_bucket.newbucket.arn}/*"
+              "${aws_s3_bucket.temp-bucket32.arn}",
+              "${aws_s3_bucket.temp-bucket32.arn}/*"
       ]
     }
   ]
